@@ -7,34 +7,36 @@
 //
 
 import UIKit
+import Foundation
 
 class ViewController: UIViewController {
     
     let eggTimes = ["Soft": 5, "Medium": 7, "Hard": 12]
+    var eggSeconds = 0
     
     @IBAction func hardnessSelector(_ sender: UIButton) {
+ 
+        let hardness = sender.currentTitle!
         
-        //print(sender.currentTitle!)
+        var seconds = eggTimes[hardness]! * 60
+       
+        eggSeconds = seconds
         
-        //let hardness = sender.currentTitle!
+        timerCountdown()
+    }
+    
+    func timerCountdown (){
+  
+        var timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
         
-        print (eggTimes[sender.currentTitle!]!)
-        
-        /*
-        switch hardness{
-        case "Soft":
-            print(eggTimes["Soft"])
-            
-        case "Medium":
-            print(eggTimes[1])
-            
-        case "Hard":
-            print(eggTimes[2])
-            
-        default:
-            print("Invalid egg")
-            
-        }*/
+    }
+    
+    @objc func updateCounter() {
+      
+        if eggSeconds > 0 {
+            print("\(eggSeconds) seconds")
+            eggSeconds -= 1
+        }
         
     }
     
