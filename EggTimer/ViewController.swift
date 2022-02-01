@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import AVFoundation
 
 class ViewController: UIViewController {
     
@@ -20,6 +21,8 @@ class ViewController: UIViewController {
     var timer = Timer()
     
     var hardness = ""
+    
+    var player: AVAudioPlayer!
     
     @IBOutlet weak var timerLabel: UILabel!
     
@@ -60,6 +63,10 @@ class ViewController: UIViewController {
         }else{
 
             timer.invalidate()
+            
+            let url = Bundle.main.url(forResource: "alarm_sound", withExtension: "mp3")
+            player = try! AVAudioPlayer(contentsOf: url!)
+            player.play()
      
             timerLabel.text = "Your \(hardness.lowercased()) egg timer is done"
         }
