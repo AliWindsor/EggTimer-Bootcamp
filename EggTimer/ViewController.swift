@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     
     let eggTimes = ["Soft": 3, "Medium": 4, "Hard": 7] //300,420,700
     
-    var eggSeconds = 60
+    var eggSeconds = 0
     
     var secondsPassed = 0
     
@@ -27,6 +27,10 @@ class ViewController: UIViewController {
     
     @IBAction func hardnessSelector(_ sender: UIButton) {
         timer.invalidate()
+        
+        progressBar.progress = 0.0
+        
+        secondsPassed = 0
         
         hardness = sender.currentTitle!
         
