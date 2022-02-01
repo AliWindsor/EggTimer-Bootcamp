@@ -32,9 +32,13 @@ class ViewController: UIViewController {
         
         secondsPassed = 0
         
+        //timerLabel.text = "How do you like your eggs?"
+        
         hardness = sender.currentTitle!
         
         eggSeconds = eggTimes[hardness]!
+        
+        timerLabel.text = "Your \(hardness.lowercased()) egg timer has started"
  
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true) //keep repeats true you else the timer will stop after firing once
         
