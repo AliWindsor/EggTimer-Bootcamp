@@ -11,10 +11,14 @@ import Foundation
 
 class ViewController: UIViewController {
     
-    let eggTimes = ["Soft": 300, "Medium": 420, "Hard": 700] //300,420,700
+    let eggTimes = ["Soft": 3, "Medium": 4, "Hard": 7] //300,420,700
+    
     var eggSeconds = 60
-    var secondsDone = 60
+    
+    var secondsPassed = 0
+    
     var timer = Timer()
+    
     var hardness = ""
     
     @IBOutlet weak var timerLabel: UILabel!
@@ -27,10 +31,7 @@ class ViewController: UIViewController {
         hardness = sender.currentTitle!
         
         eggSeconds = eggTimes[hardness]!
-        secondsDone = eggSeconds
-        
-        //timerLabel.text = "You chose \(hardness.lowercased()) eggs"
-        
+ 
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true) //keep repeats true you else the timer will stop after firing once
         
         /*selector = what do you want to happen when the timer fires?
@@ -40,20 +41,18 @@ class ViewController: UIViewController {
 
     @objc func updateCounter() { //objective c function so that timer can use it
         
-        if eggSeconds > 0 {
-         
-            print("\(eggSeconds) seconds")
+        if secondsPassed < eggSeconds {
             
-            progressBar.progress = Float(Double(eggSeconds)/Double(secondsDone))
+            secondsPassed += 1
             
-            eggSeconds -= 1
+            print("\(secondsPassed) seconds")
+            
+            progressBar.progress = Float(secondsPassed) / Float(eggSeconds)
             
         }else{
 
             timer.invalidate()
-            
-            progressBar.progress = 0.0
-            
+     
             timerLabel.text = "Your \(hardness.lowercased()) egg timer is done"
         }
         
