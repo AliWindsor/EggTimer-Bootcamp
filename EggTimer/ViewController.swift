@@ -14,13 +14,14 @@ class ViewController: UIViewController {
     let eggTimes = ["Soft": 3, "Medium": 4, "Hard": 7] //300,420,700
     var eggSeconds = 0
     var timer = Timer()
+    var hardness = ""
     
     @IBOutlet weak var timerLabel: UILabel!
     
     @IBAction func hardnessSelector(_ sender: UIButton) {
         timer.invalidate()
         
-        let hardness = sender.currentTitle!
+        hardness = sender.currentTitle!
         
         eggSeconds = eggTimes[hardness]!
         
@@ -45,7 +46,7 @@ class ViewController: UIViewController {
 
             timer.invalidate()
             
-            timerLabel.text = "Timer Done"
+            timerLabel.text = "Your \(hardness.lowercased()) egg timer is done"
         }
         
     }
